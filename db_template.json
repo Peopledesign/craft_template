@@ -1,0 +1,24 @@
+// rename to db.json
+{
+  "local":{
+    "title": "Local",
+    "database": "",
+    "user": "root",
+    "pass": "root",
+    "host": "localhost"
+  },
+  "stage":{
+    "title": "Stage",
+    "database": "",
+    "user": "",
+    "pass": "",
+    "host": ""
+  },
+  "production":{
+    "title": "Production",
+    "database": "",
+    "user": "",
+    "pass": "",
+    "host": ""
+  }
+}
