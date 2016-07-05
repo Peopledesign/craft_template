@@ -1,0 +1,28 @@
+!!! XML
+- set entries = craft.entries.section("adminLinks")
+%rss(version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom")
+
+  %channel
+    %title = siteName
+    %link = siteUrl
+    %atom:link(href="#{url('adminLinks/rss')}"
+               rel="self"
+               type="application/rss+xml")
+    %description
+      = globals.siteDescription
+    %language en-US
+    %lastBuildDate = now.rss
+    %pubDate = now.rss
+   
+    - for entry in entries
+      %item
+        %title = entry.title
+        %link  = entry.resourceUrl
+        %description 
+          = entry.body
+        %author = entry.author
+        %pubDate = entry.postDate.rss
+        %guid(isPermaLink='true') = entry.resourceUrl
+         

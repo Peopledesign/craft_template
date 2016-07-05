@@ -1,0 +1,32 @@
+- if entry is defined
+  - if entry.seoPageTitle
+    - set title = "#{entry.seoPageTitle} — #{siteName}"
+  - else
+    - set title = "#{entry.title} — #{siteName}"
+- else
+  - set title = "#{siteName}"
+:plain
+  <!DOCTYPE html>
+  <!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+  <!--[if IE 8]><html class="lt-ie9" lang="en" > <![endif]-->
+  <html class="no-js" lang="en" >
+
+%head
+  - include '_partials/html-layout/meta'
+
+  %title
+    = title
+
+  - if craft.config.env == 'local'
+    %link( href="/assets/css/blessed-style.css" rel="stylesheet" )
+
+  - else
+    %link( href="https://eaebdbfa24256f1b8259-7507b11108536674ec21bff211af2c4a.ssl.cf2.rackcdn.com/blessed-style.css" rel="stylesheet" )
+
+  = getHeadHtml()
+  %script(src = "https://663a7551bc50d25a382b-0dd5d5d80f96b5399f7f873465dc8a5b.ssl.cf2.rackcdn.com/gzk5obk.js" type = "text/javascript")
+  :javascript
+    try{Typekit.load();}catch(e){}
+
+  %script(src = "https://663a7551bc50d25a382b-0dd5d5d80f96b5399f7f873465dc8a5b.ssl.cf2.rackcdn.com/modernizr.js" type = "text/javascript")
+

@@ -1,0 +1,39 @@
+%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
+%meta{:name=>'apple-mobile-web-app-capable', :content=>'yes'}
+%meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+%meta{:charset=>'utf-8'}
+- if entry is defined
+  - if entry.metaDescription
+    %meta{:name=>'description', :content=> entry.metaDescription}
+    %meta{:content => entry.metaDescription, :property => "og:description"}/
+    %meta{:content => entry.metaDescription, :name => "twitter:description"}/
+  - if entry.metaKeywords
+    %meta{:name=>'keywords', :content=> entry.metaKeywords}
+  %meta{:content => entry.seoPageTitle + " | Neurocore", :property => "og:title"}/
+  %meta{:content =>  entry.url, :property => "og:url"}/
+  %meta{:content => entry.seoPageTitle + " | Neurocore", :name => "twitter:title"}/
+    
+  - if entry.backgroundImage.first()
+    %meta{:content => "#{entry.backgroundImage.first().url}", :property => "og:image"}/
+    %meta{:content => "#{entry.backgroundImage.first().url}", :name => "twitter:image:src"}/
+  - elseif entry.blogHeroImage.first()
+    %meta{:content => "#{entry.blogHeroImage.first().url}", :property => "og:image"}/
+    %meta{:content => "#{entry.blogHeroImage.first().url}", :name => "twitter:image:src"}/
+  - else
+    %meta{:content => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/logo-share.jpg", :property => "og:image"}/
+    %meta{:content => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/logo-share.jpg", :name => "twitter:image:src"}/
+
+  
+%meta{:content => "Neurocore", :property => "og:site_name"}/
+
+
+%meta{:content => "summary_large_image", :name => "twitter:card"}/
+%meta{:content => "@neurocore", :name => "twitter:site"}/
+
+
+%link{:href => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/icons/favicon.ico?v=4", :rel => "shortcut icon"}
+%link{:href => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/icons/apple-touch-icon-57x57-precomposed_square.png", :rel => "apple-touch-icon-precomposed"}
+%link{:href => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/icons/apple-touch-icon-72x72-precomposed_square.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}
+%link{:href => "https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/icons/apple-touch-icon-114x114-precomposed_square.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}
+
+%meta{:content => "AFAF4EC10AC03D362C108735F21D3B63", :name => "msvalidate.01"}

@@ -1,0 +1,21 @@
+- extends "_layouts/default.html"
+- set bodyClass = "default"
+
+- block page_content
+
+  %div#content{:role=>'main'}
+    %section.hero
+      .row.layout
+        %header.section-head
+          %h1.title Page Not Found
+
+    %section#pageFill.secondary.default
+      %article.richtext.article
+        %h4
+          The URL you requested
+
+          %code
+            = craft.request.url
+
+          &nbsp;
+          currently has no page.

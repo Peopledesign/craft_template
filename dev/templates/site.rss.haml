@@ -1,0 +1,33 @@
+!!! XML
+- set entries = craft.entries.find()
+%rss(version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom")
+
+
+  %channel
+    %title = siteName
+    %link = siteUrl
+    %atom:link(href="#{url('site/rss')}"
+               rel="self"
+               type="application/rss+xml")
+    %description
+      = globals.siteDescription
+    %language en-US
+    %lastBuildDate = now.rss
+    %pubDate = now.rss
+   
+    - for entry in entries
+      - if entry.getUrl() and entry.allowAnalyticsTracking
+        %item
+          %title = entry.title
+          %link  = entry.resourceUrl
+          %description 
+            - if entry.articleBody
+              = entry.articleBody | escape('html')
+            -else
+              = entry.body
+          %author = entry.author
+          %pubDate = entry.postDate.rss
+          %guid(isPermaLink='true') = entry.resourceUrl
+           

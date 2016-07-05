@@ -1,0 +1,22 @@
+- cache globally
+  - set footerNavigation = craft.entries.descendantOf(97).level(2)
+
+  %footer#footer.global-footer
+    .container
+      - for navItem in footerNavigation
+        %div(class="sub-link #{navItem.additionalClasses}")
+          %h6.title = navItem.title
+
+          - if navItem.title == "Social"
+            - include '_partials/navigation/_footer_social_menu.html'
+          
+          - elseif navItem.hasDescendants
+            - set subnav = craft.entries.descendantOf(navItem)
+            %ul.link-index
+              - for navItem in subnav
+                - include '_partials/navigation/_navitem.html'
+          
+          - elseif navItem.additionalClasses matches '/sub-menu/'
+            - include '_partials/navigation/_footer_submenu.html'
+              
+  - include '_partials/browser-support'

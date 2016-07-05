@@ -1,0 +1,12 @@
+!!! XML
+- set entries = craft.entries.find()
+%urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+  - for entry in entries
+    - if entry.getUrl() and entry.allowAnalyticsTracking
+      %url
+        %loc
+          = entry.getUrl()
+        - if entry.xmlSitemapPriority > 0
+          %priority = entry.xmlSitemapPriority 
+        - else 
+          %priority 0.5

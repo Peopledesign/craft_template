@@ -1,0 +1,13 @@
+/ Javascript at the bottom for faster page loads
+
+%script(src = 'https://663a7551bc50d25a382b-0dd5d5d80f96b5399f7f873465dc8a5b.ssl.cf2.rackcdn.com/E-v1.js' type = "text/javascript" defer="defer")
+%script(src = 'https://663a7551bc50d25a382b-0dd5d5d80f96b5399f7f873465dc8a5b.ssl.cf2.rackcdn.com/popover-v1.js' type = "text/javascript" defer="defer")
+%script(src = 'https://663a7551bc50d25a382b-0dd5d5d80f96b5399f7f873465dc8a5b.ssl.cf2.rackcdn.com/scripts.min.js' type = "text/javascript" defer="defer")
+
+- if entry is defined
+  - if entry.allowAnalyticsTracking
+    = globals.analyticsCode|raw
+
+- elseif craft.request.firstSegment == ''
+  = globals.analyticsCode|raw
+

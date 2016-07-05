@@ -1,0 +1,16 @@
+- if navItem.cta
+  %li{:class=>"cta #{navItem.slug} #{navItem.additionalClasses}"}
+    %a{:href => "#{navItem.navigationUrl}"} = navItem.title
+
+- elseif navItem.additionalClasses matches '/sub-menu/'
+  - set submenuSection = navItem.additionalClasses | split('[')[1]|split(']')[0]
+  %li{:class=>"#{navItem.slug} #{navItem.additionalClasses}"}
+    %a{:href => "#{navItem.navigationUrl}", "data-dropdown-trigger" => "sub-menu-#{submenuSection}"} = navItem.title
+
+- elseif navItem.navigationUrl
+  %li{:class=>"#{navItem.slug} #{navItem.additionalClasses}"}
+    %a{:href => "#{navItem.navigationUrl}"} = navItem.title
+
+- else
+  %li{:class=>"#{navItem.slug} #{navItem.additionalClasses}"}
+    %span = navItem.title

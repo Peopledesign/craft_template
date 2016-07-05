@@ -1,0 +1,18 @@
+- include '_partials/html-layout/header'
+
+- if bodyClass is defined
+  %body(class="#{bodyClass}")
+- else
+  %body(class="")
+
+= craft.inlin.er('/assets/img/shapes.svg') | raw
+.off-canvas-wrap(data-offcanvas = "")
+  .inner-wrap
+    - include '_partials/global_header'
+    %section.main-section
+      - block page_content
+      - endblock
+      - include '_partials/global_footer'
+
+- include '_partials/html-layout/footer'
+

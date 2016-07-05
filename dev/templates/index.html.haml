@@ -1,0 +1,135 @@
+- extends "_layouts/default.html"
+- set bodyClass = "index"
+
+
+- block page_content
+  - cache globally unless currentUser
+    - set entry = craft.entries.section("home").first()
+    - set allConditions = craft.entries.section("conditions").order("title")
+    %div#content{:role=>'main'}
+      %section.hero
+        #backgroundVideos.slider
+          .captions
+            - for slideMatrix in entry.sectionSlideshow
+              - if slideMatrix.type == 'sectionSlide'
+                .row
+                  .layout
+                    %header.section-head{:class=>"caption-#{loop.index}", "data-caption"=>"#{loop.index}", "data-background"=> "#{slideMatrix.slideImage.first().url}"}
+                      %h2.title
+                        = slideMatrix.slideTitle
+                      .sub-title
+                        = slideMatrix.slideCopy
+
+          %figure.background-images
+
+        .cta-group
+          - include '_partials/_ctas.html'
+
+      %section.solution
+        %header.section-head
+          %h2.title
+            = entry.sectionConditionIndex.first().condIndexTitle
+          .sub-title
+            = entry.sectionConditionIndex.first().condIndexCopy
+
+        - include '_partials/global_conditionIndex.html'
+
+        .cta-group
+          - for cta in entry.sectionConditionIndex
+            - if cta.type == "sectionCTA"
+              - if cta.condIndexCtaPrimary
+                %a.button.cta(href = "#{cta.condIndexCtaLink}")
+                  = cta.condIndexCtaTitle
+              - else
+                %a.button.cta.secondary(href = "#{cta.condIndexCtaLink}")
+                  = cta.condIndexCtaTitle
+
+      %section.brain
+        %header.section-head
+          %h2.title
+            %a.jump-link{:href => "/learn-more"}
+              = entry.sectionFeatureVideo.first().featureVidTitle
+
+          %p.sub-title
+            %a.jump-link{:href => "/learn-more"}
+              = entry.sectionFeatureVideo.first().featureVidCopy
+
+          .cta-group
+            - for data in entry.sectionFeatureVideo
+              - if data.type == "cta"
+                - if data.featureVidCtaPrimary
+                  %a.button.cta(href = "#{data.featureVidCtaLink}")
+                    = data.featureVidCtaTitle
+                - else
+                  %a.button.cta.secondary(href = "#{data.featureVidCtaLink}")
+                    = data.featureVidCtaTitle
+
+        .centered-video
+          - for data in entry.sectionFeatureVideo
+            - if data.type == "video"
+              %a.trigger-video{:class=> "wistia-popover[height=540,playerColor=7b796a,width=960]", :href => "#{data.featureVidlink}"}
+                %span.caption
+                  = data.featureVidCaption
+                %img.video-brain{:src=>"https://4c0cdf44dc96a428e02f-d4029510bb63259fdf6ef346d05724c4.ssl.cf2.rackcdn.com/placeholder-video.jpg"}
+                %svg.icon
+                  %use{"xlink:href" => "#shape-play"}
+
+      %section.measure
+        .row
+          %header.section-head
+            %h2.title
+              %a.jump-link{:href => "#{entry.sectionFeaturedColumns.nth(3).featColCtaLink}"}
+                = entry.sectionFeaturedColumns.first().featColTitle
+
+            %p.sub-title
+              %a.jump-link{:href => "#{entry.sectionFeaturedColumns.nth(3).featColCtaLink}"}
+                = entry.sectionFeaturedColumns.first().featColCopy
+
+          - for data in entry.sectionFeaturedColumns
+            - if data.type == 'threeColumns'
+              %figure.step
+                %a.jump-link.step-link{:href => "#{entry.sectionFeaturedColumns.nth(3).featColCtaLink}"}
+                  %svg.icon
+                    %use{"xlink:href" => "#shape-one"}
+                  %h6
+                    = data.featColTitleLeft
+                  %p
+                    = data.featColCopyLeft
+
+              %figure.step
+                %a.jump-link.step-link{:href => "#{entry.sectionFeaturedColumns.nth(3).featColCtaLink}"}
+                  %svg.icon
+                    %use{"xlink:href" => "#shape-two"}
+                  %h6
+                    = data.featColTitleCenter
+                  %p
+                    = data.featColCopyCenter
+
+              %figure.step
+                %a.jump-link.step-link{:href => "#{entry.sectionFeaturedColumns.nth(3).featColCtaLink}"}
+                  %svg.icon
+                    %use{"xlink:href" => "#shape-three"}
+                  %h6
+                    = data.featColTitleRight
+                  %p
+                    = data.featColCopyRight
+
+          .cta-group
+            - for data in entry.sectionFeaturedColumns
+              - if data.type == "cta"
+                - if data.featColCtaPrimary
+                  %a.button.cta(href = "#{data.featColCtaLink}")
+                    = data.featColCtaTitle
+                - else
+                  %a.button.cta.secondary(href = "#{data.featColCtaLink}")
+                    = data.featColCtaTitle
+
+        .full-width-banner
+
+      %section.body-cta
+        - include '_partials/_form-embed.html' with {'form': entry.form.first()}
+
+      .body-modals
+        - include '_partials/overview-video.html'
+
+      %a.google-plus-link{:href => "https://plus.google.com/116414148296130401833", :target=>"_blank", :rel=>"publisher"}

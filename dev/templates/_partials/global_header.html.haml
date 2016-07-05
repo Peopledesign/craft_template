@@ -1,0 +1,57 @@
+- if entry.navDisplay is defined
+  - set navStyle = entry.navDisplay
+- else
+  - set navStyle = ""
+
+- cache using key craft.request.path
+
+  - set headerNavigation = craft.entries.descendantOf(98)
+  - set mobileNavigation = craft.entries.descendantOf(278)
+  - set headerSecondaryNavigation = craft.entries.descendantOf(287)
+
+  %div{:class=>"contain-to-grid sticky collapse #{navStyle}"}
+    %nav.top-bar{"data-options" => "sticky_on: all", "data-topbar" => "", :role => "navigation"}
+      %section.top-bar-section
+        %ul.nav-row.title-area
+          %li.name
+            %h6
+              %a.title{:href => "/"}
+                %svg.icon
+                  %title Neurocore
+                  %use{"xlink:href" => "#shape-logo"}
+
+          %li#aside-trigger
+            %a.right-off-canvas-toggle{"aria-controls" => "aside_navigation", "aria-expanded" => "false", :href => "#aside_navigation", :role => "button"}
+              #menuButton.menu-icon
+                %span.burger-icon
+
+        %ul.nav-row.left.primary
+          - if headerNavigation
+            - for navItem in headerNavigation
+              - include "_partials/navigation/_navitem.html"
+
+        %ul.nav-row.right.secondary
+          - if headerSecondaryNavigation
+            - for navItem in headerSecondaryNavigation
+              - include "_partials/navigation/_navitem.html"
+
+          %li.search
+            %a( data-reveal-id="searchModal" href="/search/results")
+              %svg.icon
+                %title Search
+                %use(xlink:href = "#shape-search")
+
+    - include "_partials/navigation/_header_submenu.html"
+
+  - include "_partials/_search_modal.html"
+
+  %aside#aside_navigation.right-off-canvas-menu
+    %ul.off-canvas-list
+      - if mobileNavigation
+        - for navItem in mobileNavigation
+          - include "_partials/navigation/_mobile_navitem.html"
+
+
+
+
+
