@@ -16,5 +16,10 @@
     "tests"
   ],
   "homepage": "https://github.com/peopledesign/craft_template",
-  "dependencies": {}
+  "dependencies": {
+    "foundation-sites": "~6.0.1",
+    "modernizr": ">= 2.7.2",
+    "underscore": "~1.8.3",
+    "waypoints": "~4.0.0"
+  }
 }
