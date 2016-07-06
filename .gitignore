@@ -1,2 +1,9 @@
+*.scssc
+*.sassc
+bower_components
+content
+craft
+node_modules
 
 db.json
+.DS_Store
